@@ -18,11 +18,6 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-//    public Message(String text, LocalDateTime creationDate) {
-//        this.text = text;
-//        this.creationDate = creationDate;
-//    }
-
     private String text;
 
 
