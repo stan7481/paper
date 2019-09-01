@@ -12,6 +12,7 @@ import com.news.paper.exceptions.NotFoundException;
 import com.news.paper.repo.MessageRepo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,17 +26,14 @@ public class MessageController {
         this.messageRepo = messageRepo;
     }
 
-    private int counter = 4;
-
-    
 
 
-
+//    public List<Message> list() {
     @GetMapping
-    public List<Message> list() {
-
-        return messageRepo.findAll();
-
+    public String list(Model model) {
+//        return messageRepo.findAll();
+        model.addAttribute("frontendData", "text");
+    return "index";
     }
 
     @GetMapping("{id}")
@@ -66,37 +64,6 @@ public class MessageController {
         return messageRepo.save(messageFromDb);
     }
 
-//        message.put("id", String.valueOf(counter++));
-//
-//        messasges.add(message);
-//
-//        return message;
-//    }
 
-
-//    private Map<String, String> getMessage(@PathVariable String id) {
-//
-//        return messasges.stream()
-//            .filter(message -> message.get("id").equals(id))
-//            .findFirst()
-//            .orElseThrow(NotFoundException::new);
-//    }
-
-//    @PutMapping("{id}")
-//    public Map<String, String> update(@PathVariable String id, @RequestBody Map<String, String> message){
-//        Map<String, String> messageFromDb = getMessage(id);
-//
-//        messageFromDb.putAll(message);
-//        messageFromDb.put("id", id);
-//
-//        return messageFromDb;
-//    }
-//
-//    @DeleteMapping("{id}")
-//    public void delete(@PathVariable String id){
-//        Map<String,String> message = getMessage(id);
-//
-//        messasges.remove(message);
-//    }
 
 }
