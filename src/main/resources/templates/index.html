@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <!--<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">-->
 <html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.thymeleaf.org ">
+      xsi:schemaLocation="http://www.thymeleaf.org "
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -21,9 +24,16 @@
 
 <div th:insert="fragments/navbar::navbar">  </div>
 
+
+<section layout:fragment="content">
+
+    <script th:inline="javascript">
+        var frontendData = [[${frontendData}]];
+    </script>
+
     <div id="app"></div>
     <script src="http://localhost:8000/main.js"></script>
-<!--    <script src="/js/main.js"></script>-->
-<!--https://habr.com/ru/company/ruvds/blog/438982/-->
+</section>
+
 </body>
 </html>

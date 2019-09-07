@@ -12,7 +12,7 @@ public class Content {
 
         return "content1";
     }
-    
+
     @GetMapping("content2")
     public String test2(){
 
