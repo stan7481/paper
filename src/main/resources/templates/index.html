@@ -1,8 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>News Paper</title>
+
+<!--    <div th:replace="fragments/header :: header"> This header content is going to be replaced.</div>-->
 
 
     <script th:inline="javascript">
@@ -13,6 +18,8 @@
 
 </head>
 <body>
+
+<div th:insert="/navbar::navbar">  </div>
 
     <div id="app"></div>
     <script src="http://localhost:8000/main.js"></script>

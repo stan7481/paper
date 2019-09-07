@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>News Paper</title>
+
+
+</head>
+<body>
+<div> Registration Page </div>
+
+<form action="/registration" method="post">
+    <div><label>User Name: <input type="text" name="username"/></label></div>
+    <div><label>User Password: <input type="password" name="password"/></label></div>
+    <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+    <div><input type="submit" value="Sign In"/></div>
+</form>
+
+</body>
+</html>
