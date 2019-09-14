@@ -1,10 +1,19 @@
  <template>
-    <div style="position: relative; width: 300px;"> 
+  
+  <div> 
+    <message-form :messages="messages" :messageAttr="message" />
+        <div class="card-columns" > 
 
-        <message-form :messages="messages" :messageAttr="message" />
+      
         <message-row v-for="message in messages" :key="message.id" 
            :message="message" :messages="messages" :editMessage="editMessage" :deleteMessage="deleteMessage" /> 
     </div>
+
+  </div>
+     
+    
+
+
  </template>
  
  <script>
@@ -40,5 +49,7 @@
  </script>
 
  <style>
+
+
 
  </style>

@@ -1,8 +1,12 @@
 <template>
-    <div> 
-        <input type="text" placeholder="Write something" v-model="text" />
-        <input type="button" value="Save" @click="save" />
-    </div>
+    
+<div>
+    <div class="form-group"> 
+        <label for="exampleFormControlTextarea1">Write Something</label>
+        <input type="text" placeholder="Write something" v-model="text" class="form-control" id="exampleFormControlTextarea1" rows="3" />  </div>
+    <input type="button" value="Save" @click="save" class="btn btn-primary mb-2" />
+</div>
+
 </template>
 
 

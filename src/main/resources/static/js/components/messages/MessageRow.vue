@@ -1,9 +1,15 @@
  <template>
-    <div> ({{ message.id }}) {{ message.text }} 
-        <span style="position: absolute; right: 0">
-            <input type="button" value="Edit" @click="edit" />
-            <input type="button" value="X" @click="del" />
-        </span>
+   <div class="card" style="width: 18rem;">
+   <div class="card-body">
+    <p class="card-text">
+        ({{ message.id }}) {{ message.text }}
+
+     </p>
+            <input type="button" class="btn btn-primary" value="Edit" @click="edit" />
+            <input type="button" class="btn btn-primary" value="X" @click="del" />
+
+
+    </div>
     </div>
  </template>
 
