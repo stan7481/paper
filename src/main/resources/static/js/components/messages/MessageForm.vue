@@ -2,8 +2,13 @@
     
 <div>
     <div class="form-group"> 
-        <label for="exampleFormControlTextarea1">Write Something</label>
-        <input type="text" placeholder="Write something" v-model="text" class="form-control" id="exampleFormControlTextarea1" rows="3" />  </div>
+        <input type="text" class="form-control"  v-bind:class="{ 'is-invalid': invalid }"  v-model="text"  id="exampleFormControlTextarea1" placeholder="Write something" required>  
+        <div class="invalid-feedback">
+        Please write something
+      </div> </div>
+
+
+
     <input type="button" value="Save" @click="save" class="btn btn-primary mb-2" />
 </div>
 
@@ -27,7 +32,8 @@ export default {
     data() {
         return {
             text: '',
-            id: ''
+            id: '',
+            invalid: false
         }
     },
 
@@ -49,15 +55,25 @@ export default {
                         this.messages.splice(index, 1, data)
                         this.text = ''
                         this.id = ''
+                        this.invalid= false
                     })
                 )
             } else {
-                this.$resource('/message{/id}').save({}, message).then(result => 
+               if (this.text != '') {
+                    this.$resource('/message{/id}').save({}, message).then(result => 
                     result.json().then(data => {
                         this.messages.push(data)
                         this.text = ''
+                        this.invalid=false
                     })
                 )
+
+               }
+               else {
+                this.invalid= true
+                
+               }
+                
             }
 
         }

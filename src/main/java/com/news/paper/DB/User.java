@@ -3,6 +3,8 @@ package com.news.paper.DB;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 @Entity
@@ -12,8 +14,14 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String username;
+
     private String password;
+
+    @Transient
+    private String password2;
+
     private boolean active;
 
    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
