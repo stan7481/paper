@@ -5,8 +5,8 @@
         <div class="card-columns" > 
 
       
-        <message-row v-for="message in messages" :key="message.id" 
-           :message="message" :messages="messages" :editMessage="editMessage" :deleteMessage="deleteMessage" /> 
+        <message-row  v-for="message in messages" :key="message.id"
+           :message="message" :messages="messages" :editMessage="editMessage" :deleteMessage="deleteMessage"/>
     </div>
 
   </div>

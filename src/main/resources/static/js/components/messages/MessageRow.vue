@@ -5,6 +5,7 @@
         ({{ message.id }}) {{ message.text }}
 
      </p>
+
             <input type="button" class="btn btn-primary" value="Edit" @click="edit" />
             <input type="button" class="btn btn-primary" value="X" @click="del" />
 

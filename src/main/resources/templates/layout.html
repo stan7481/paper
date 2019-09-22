@@ -16,9 +16,11 @@
 </head>
 <body>
 <header>
+<!--    <div th:insert="fragments/navbar::navbar" style="visibility: visible">  </div>-->
+<!--        <div th:insert="fragments/navbar::navbar" th:classappend="visibility: ${frontendData != null ? 'visible' : 'hidden'}">  </div>-->
     <div th:insert="fragments/navbar::navbar">  </div>
 </header>
-
+<!--${module == 'tasks' ? 'active' : ''}-->
 
 <section layout:fragment="content" class="container mt-5" >
     <p>Page content goes here</p>
