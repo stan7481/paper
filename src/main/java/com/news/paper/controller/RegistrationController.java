@@ -36,8 +36,7 @@ public class RegistrationController {
     @Autowired
     private UserService userSevice;
 
-    @Autowired
-    protected AuthenticationManager authenticationManager;
+
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -75,7 +74,7 @@ public class RegistrationController {
 //            SecurityContextHolder.getContext().setAuthentication(authentication);
 
 
-            authLogin(user, uncodedPass, request);
+            userSevice.authLogin(user, uncodedPass, request);
 
 //            try {
 //                request.login(user.getUsername(),user.getPassword());
@@ -127,12 +126,7 @@ public class RegistrationController {
 
     }
 
-    public void authLogin(User user, String pass, HttpServletRequest request){
-        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(user.getUsername(), pass);
-        authToken.setDetails(new WebAuthenticationDetails(request));
-        Authentication authentication = authenticationManager.authenticate(authToken);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-    }
+
 
 //    private void authenticateUserAndSetSession(User user, String passwordFromForm, HttpServletRequest request){
 //
