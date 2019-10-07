@@ -22,28 +22,32 @@
     import messagesApi from 'api/messages'
 
     export default {
-        props: ['messages'],
+        // props: ['messages'],
         components: {
             MessageRow,
             MessageForm
         },
         data() {
             return {
-                message: null
+                message: null,
+               messages: frontendData.messages
             }
         },
         methods: {
             editMessage(message) {
                 this.message = message
             },
-            deleteMessage(message) {
-                messagesApi.remove(message.id).then(result => {
-                    if (result.ok) {
-                        if (index > -1) {
-                        this.messages.splice(this.messages.indexOf(message), 1)
-                        }
-                    }
-                })
+            // standart rest Api delete
+            deleteMessage(message) { 
+                // messagesApi.remove(message.id).then(result => {
+                //     if (result.ok) {
+                //         // const index = this.messages.findIndex(item => item.id === data.body.id)
+                //         // if (index > -1) {
+                //         // this.messages.splice(this.messages.indexOf(message), 1)
+                //         // }
+                //     }
+                // })
+            messagesApi.remove(message.id)
             }
         }
 
@@ -56,3 +60,5 @@
 
 
  </style>
+
+

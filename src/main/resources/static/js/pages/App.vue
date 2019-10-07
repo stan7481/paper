@@ -1,22 +1,21 @@
 <template>
-    <messages-list :messages="messages" />
+    <!-- <messages-list :messages="messages" /> -->
     
+        <router-view></router-view>
+
 </template>
 
 <script>
-    import MessagesList from 'components/messages/MessageList.vue'
+    // import MessagesList from 'components/messages/MessageList.vue'
     import { addHandler } from 'util/ws'
 
     export default {
-        components: {
-            MessagesList
-        },
         data()  {
             return{
                 messages: frontendData.messages
             }
         },
-        created() {
+        created() { // socets rest Api
          addHandler(data => {
             if(data.objectType === 'MESSAGE'){
                 const index = this.messages.findIndex(item => item.id === data.body.id)
@@ -36,11 +35,11 @@
                         }
                         break
                     default:
-                        console.error(`´Looks like the object type if unknow "${data.eventType}"`)
+                        console.error(`Looks like the object type if unknow "${data.eventType}"`)
                 }
 
             } else {
-                console.error(`Looks like the object type if uncnown "${data.objectType}"`)
+                console.error(`Looks like the object type if unknown "${data.objectType}"`)
             }
            
          })   
