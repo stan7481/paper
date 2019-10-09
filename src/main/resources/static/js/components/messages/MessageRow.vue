@@ -7,7 +7,10 @@
      </p>
         <!-- <div v-if="userId == message.author.id" >/profile/ -->
         <!-- <div v-if="this.$route.path == '/profile/\d+'" > -->
-        <div v-if="(this.$route.path.match('prof') != null) && (userId == message.author.id)" >    
+      
+<!-- v-if="(this.$route.path.match('prof') != null) && (userId == message.author.id)" -->
+
+        <div v-if="(this.$route.path.match('prof') != null) && (userId == message.author.id)">    
             <input type="button" class="btn btn-primary" value="Edit" @click="edit" />
             <input type="button" class="btn btn-primary" value="X" @click="del"  />  
         </div>

@@ -48,10 +48,10 @@
             deleteMessage(message) { 
                 // messagesApi.remove(message.id).then(result => {
                 //     if (result.ok) {
-                //         // const index = this.messages.findIndex(item => item.id === data.body.id)
-                //         // if (index > -1) {
-                //         // this.messages.splice(this.messages.indexOf(message), 1)
-                //         // }
+                //         const index = this.messages.findIndex(item => item.id === data.body.id)
+                //         if (index > -1) {
+                //         this.messages.splice(this.messages.indexOf(message), 1)
+                //         }
                 //     }
                 // })
             messagesApi.remove(message.id)

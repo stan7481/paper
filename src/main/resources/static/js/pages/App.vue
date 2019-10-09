@@ -12,6 +12,10 @@
     export default {
         data()  {
             return{
+              
+
+                // messages: frontendData.messages.filter(message => message.author.id == ((this.$route.params.id != null) ? this.$route.params.id : frontendData.usrID))
+
                 messages: frontendData.messages,
                 // userId: frontendData.usrID
             }

@@ -1,7 +1,7 @@
  <template>
   
   <div> 
-  	Profille {{ this.$route.path }}
+  	Profille test{{ this.$route.path }}
     <!-- {{ $route.params.id }} -->
     <message-form :messages="messages" :messageAttr="message" />
         <div class="card-columns" > 
@@ -37,8 +37,10 @@
                userId: frontendData.usrID,
                currUser: (this.$route.params.id != null) ? this.$route.params.id : frontendData.usrID,
                // messages: frontendData.messages.filter(message => frontendData.usrID == message.author.id)
-             messages: frontendData.messages.filter(message => message.author.id == ((this.$route.params.id != null) ? this.$route.params.id : frontendData.usrID)
-                )
+             messages: frontendData.messages.filter(message => message.author.id == ((this.$route.params.id != null) ? this.$route.params.id : frontendData.usrID)  )
+                
+                 // messages: frontendData.messages,
+              
                // messages: null
             }
         },
@@ -65,12 +67,13 @@
             deleteMessage(message) { 
                 // messagesApi.remove(message.id).then(result => {
                 //     if (result.ok) {
-                //         // const index = this.messages.findIndex(item => item.id === data.body.id)
-                //         // if (index > -1) {
-                //         // this.messages.splice(this.messages.indexOf(message), 1)
-                //         // }
+                //         const index = this.messages.findIndex(item => item.id === data.body.id)
+                //         if (index > -1) {
+                //         this.messages.splice(this.messages.indexOf(message), 1)
+                //         }
                 //     }
                 // })
+                this.messages.splice(this.messages.indexOf(message), 1)
             messagesApi.remove(message.id)
             }
         }

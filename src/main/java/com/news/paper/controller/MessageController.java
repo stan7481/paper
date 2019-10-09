@@ -77,7 +77,7 @@ public class MessageController {
             @PathVariable("id") Message messageFromDb,
             @RequestBody Message message)
     {
-        BeanUtils.copyProperties(message, messageFromDb, "id");
+        BeanUtils.copyProperties(message, messageFromDb, "id", "author");
 
         Message updatedMessage = messageRepo.save(messageFromDb);
         wsSender.accept(EventType.UPDATE, updatedMessage);
