@@ -1,10 +1,12 @@
 package com.news.paper.controller;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.function.BiConsumer;
 
 import com.news.paper.DB.Message;
 
+import com.news.paper.DB.User;
 import com.news.paper.DB.Views;
 import com.news.paper.dto.EventType;
 import com.news.paper.dto.ObjectType;
@@ -12,6 +14,8 @@ import com.news.paper.repo.MessageRepo;
 import com.news.paper.util.WsSender;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,6 +58,12 @@ public class MessageController {
     @PostMapping
     public Message create (@RequestBody Message message){
         message.setCreationDate(LocalDateTime.now());
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User usr = (User)authentication.getPrincipal();
+        Long userId = usr.getId();
+
+        message.setAuthor(usr);
 
         //////////////
         Message updateMessage = messageRepo.save(message);

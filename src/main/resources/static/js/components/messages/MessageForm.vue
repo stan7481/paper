@@ -1,7 +1,7 @@
 <template>
     
-<div>
-    <div class="form-group"> 
+<div v-if="(this.$route.params.id == null) || (userId == this.$route.params.id)">
+    <div class="form-group" > 
         <input type="text" class="form-control"  v-bind:class="{ 'is-invalid': invalid }"  v-model="text"  id="exampleFormControlTextarea1" placeholder="Write something" required>  
         <div class="invalid-feedback">
         Please write something
@@ -26,7 +26,8 @@ export default {
         return {
             text: '',
             id: '',
-            invalid: false
+            invalid: false,
+            userId: frontendData.usrID
         }
     },
 

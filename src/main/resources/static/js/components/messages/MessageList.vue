@@ -1,7 +1,8 @@
  <template>
   
   <div> 
-    <message-form :messages="messages" :messageAttr="message" />
+    <span>User:  {{ userId }}</span> 
+    <!-- <message-form :messages="messages" :messageAttr="message" /> -->
         <div class="card-columns" > 
 
       
@@ -21,6 +22,10 @@
     import MessageForm from 'components/messages/MessageForm.vue'
     import messagesApi from 'api/messages'
 
+// $http.get('api/user').then(response => {
+//    console.log(response.body);
+// })
+
     export default {
         // props: ['messages'],
         components: {
@@ -30,7 +35,9 @@
         data() {
             return {
                 message: null,
-               messages: frontendData.messages
+               messages: frontendData.messages,
+                // userId: frontendData.usrID
+               // userIdi: userId
             }
         },
         methods: {

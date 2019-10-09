@@ -1,7 +1,8 @@
  <template>
   
   <div> 
-  	Profille
+  	Profille {{ this.$route.path }}
+    <!-- {{ $route.params.id }} -->
     <message-form :messages="messages" :messageAttr="message" />
         <div class="card-columns" > 
 
@@ -18,12 +19,12 @@
  </template>
  
  <script>
-    import MessageRow from 'components/messages/MessageRow.vue'
+     import MessageRow from 'components/messages/MessageRow.vue' 
     import MessageForm from 'components/messages/MessageForm.vue'
     import messagesApi from 'api/messages'
 
     export default {
-        // props: ['messages'],
+        // props: ['id'],
         components: {
             MessageRow,
             MessageForm
@@ -31,9 +32,31 @@
         data() {
             return {
                 message: null,
-               messages: frontendData.messages
+               // messages: frontendData.messages,
+               
+               userId: frontendData.usrID,
+               currUser: (this.$route.params.id != null) ? this.$route.params.id : frontendData.usrID,
+               // messages: frontendData.messages.filter(message => frontendData.usrID == message.author.id)
+             messages: frontendData.messages.filter(message => message.author.id == ((this.$route.params.id != null) ? this.$route.params.id : frontendData.usrID)
+                )
+               // messages: null
             }
         },
+    //     mounted: function () {
+    // // `this` указывает на экземпляр vm
+    //         // currUser = $route.params.id
+
+    //         messages = frontendData.messages.filter(message => message.author.id == currUser)
+
+    //         },
+
+    //     mounted: function() {
+    //     parameters = this.$route.query
+    //     console.log(parameters)
+   
+        
+  
+    // },
         methods: {
             editMessage(message) {
                 this.message = message

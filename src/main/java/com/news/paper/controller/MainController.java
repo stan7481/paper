@@ -34,16 +34,22 @@ public class MainController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
 
+        User usr = (User)authentication.getPrincipal();
+        Long userId = usr.getId();
+
         HashMap<Object, Object> data = new HashMap<>();
+
 
 //        user = Session.SPRING_SECURITY_CONTEXT.authentication.principal;
 //        name = user.getUsername()
 
         data.put("messages", messageRepo.findAll());
+        data.put("usrID", userId);
+//        data.put("userName", currentPrincipalName);
 
         model.addAttribute("frontendData", data);
         model.addAttribute("userName", currentPrincipalName);
-
+//        model.addAttribute("userId", UserId);
           return "index";
     }
 

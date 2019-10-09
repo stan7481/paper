@@ -12,7 +12,8 @@
     export default {
         data()  {
             return{
-                messages: frontendData.messages
+                messages: frontendData.messages,
+                // userId: frontendData.usrID
             }
         },
         created() { // socets rest Api
