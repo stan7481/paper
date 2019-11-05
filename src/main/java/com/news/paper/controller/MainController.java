@@ -1,68 +1,69 @@
 package com.news.paper.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.news.paper.DB.User;
+import com.news.paper.DB.Views;
 import com.news.paper.repo.MessageRepo;
+import com.news.paper.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 public class MainController {
     private final MessageRepo messageRepo;
+    private final UserRepo userRepo;
+
+    private final ObjectWriter messageWriter;
+    private final ObjectWriter profileWritter;
 
     @Autowired
-    public MainController(MessageRepo messageRepo) {
+    public MainController(MessageRepo messageRepo, UserRepo userRepo, ObjectMapper mapper) {
         this.messageRepo = messageRepo;
+        this.userRepo = userRepo;
+
+
+        ObjectMapper objectMapper = mapper.setConfig(mapper.getSerializationConfig());
+
+        this.messageWriter =  mapper
+                .setConfig(mapper.getSerializationConfig())
+                .writerWithView(Views.FullMessage.class);
+
+        this.profileWritter =  mapper
+                .setConfig(mapper.getSerializationConfig())
+                .writerWithView(Views.FullProfile.class);
+//
     }
 
     @GetMapping("/")
-    public String main(Model model) {
-      //  UsernamePasswordAuthenticationToken authToken
-//        Object data1 = authToken.getPrincipal();
-//        data1.getUsername();
-//        @RequestParam(required=false) User user
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentPrincipalName = authentication.getName();
-
-        User usr = (User)authentication.getPrincipal();
-        Long userId = usr.getId();
+    public String main(Model model, @AuthenticationPrincipal User user) throws JsonProcessingException {
 
         HashMap<Object, Object> data = new HashMap<>();
 
 
-//        user = Session.SPRING_SECURITY_CONTEXT.authentication.principal;
-//        name = user.getUsername()
+        String messages = messageWriter.writeValueAsString(messageRepo.findAll());
 
-        data.put("messages", messageRepo.findAll());
-        data.put("usrID", userId);
-//        data.put("userName", currentPrincipalName);
+//        data.put("messages", messages);
+        data.put("usrID", user.getId());
+
+        User userFromDb = userRepo.findById(user.getId()).get();
+        String serializedProfile = profileWritter.writeValueAsString(userFromDb);
+
+
+        model.addAttribute("messages", messages);
+        model.addAttribute("profile", serializedProfile);
+
 
         model.addAttribute("frontendData", data);
-        model.addAttribute("userName", currentPrincipalName);
-//        model.addAttribute("userId", UserId);
-          return "index";
-    }
+        model.addAttribute("userName", user.getUsername());
 
-//    @GetMapping("/")
-//    public String main(User user, Model model) {
-//
-//        HashMap<Object, Object> data = new HashMap<>();
-//
-//        data.put("messages", messageRepo.findAll());
-//
-//        model.addAttribute("frontendData", data);
-//
-//        return "index";
-//    }
+        return "index";
+    }
 
 }

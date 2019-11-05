@@ -1,24 +1,20 @@
 <template>
     
-<div v-if="(this.$route.params.id == null) || (userId == this.$route.params.id)">
-    <div class="form-group" > 
-        <input type="text" class="form-control"  v-bind:class="{ 'is-invalid': invalid }"  v-model="text"  id="exampleFormControlTextarea1" placeholder="Write something" required>  
-        <div class="invalid-feedback">
-        Please write something
-      </div> </div>
+    <div >
+        <div class="form-group" > 
+            <input type="text" class="form-control"  v-bind:class="{ 'is-invalid': invalid }"  v-model="text"  id="exampleFormControlTextarea1" placeholder="Write something" required>  
+            <div class="invalid-feedback">
+            Please write something
+          </div> </div>
 
-
-
-    <input type="button" value="Save" @click="save" class="btn btn-primary mb-2" />
-</div>
+        <input type="button" value="Save" @click="save" class="btn btn-primary mb-2" />
+    </div>
 
 </template>
 
 
 <script>
     import messagesApi from 'api/messages'
-
-    
 
 export default {
     props: ['messages','messageAttr'],
@@ -29,6 +25,12 @@ export default {
             invalid: false,
             userId: frontendData.usrID
         }
+    },
+    computed: {
+        isMyProfile() {
+            return (this.$route.params.id == null) || (userId == this.$route.params.id)
+        }
+
     },
 
     watch: {
@@ -64,10 +66,6 @@ export default {
                         } else {
                            this.messages.push(data) 
                         }
-
-
-                        
-                        
                         this.invalid=false
                     })
                 )

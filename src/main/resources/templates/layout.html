@@ -16,20 +16,13 @@
 </head>
 <body>
 <header>
-<!--    <div th:insert="fragments/navbar::navbar" style="visibility: visible">  </div>-->
-<!--        <div th:insert="fragments/navbar::navbar" th:classappend="visibility: ${frontendData != null ? 'visible' : 'hidden'}">  </div>-->
     <div th:insert="fragments/navbar::navbar">  </div>
 </header>
-<!--${module == 'tasks' ? 'active' : ''}-->
 
 <section layout:fragment="content" class="container mt-5" >
     <p>Page content goes here</p>
 </section>
 
-
-
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

@@ -8,12 +8,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>News Paper</title>
 
-
 </head>
 <body>
 <section layout:fragment="content">
-
-
 
     <form action="/registration" method="post" class="d-flex justify-content-center">
         <div class="form-group w-25">
@@ -31,37 +28,17 @@
                 Passwords must be same
             </div></div>
 
-
             <div><label for="confirmPassword" class="sr-only">Confirm password</label>
             <input type="password" id="confirmPassword" class="form-control" th:classappend="${passErr} ? 'is-invalid' : ' '" name="password2" placeholder="Confirm password" required>
             <div class="invalid-feedback">
                 Passwords must be same
             </div></div>
 
-
             <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
-           <input type="submit" class="btn btn-md btn-primary btn-block" value="Registration"/>
-
+            <input type="submit" class="btn btn-md btn-primary btn-block" value="Registration"/>
 
         </div>
     </form>
-
-<!--  work  -->
-
-<!--    <form class=" d-flex justify-content-center">-->
-<!--        <div class="form-group w-25">-->
-<!--            <h1 class="h3 mb-3 font-weight-normal text-center">Registration</h1>-->
-<!--            <label for="inputEmail" class="sr-only">Username</label>-->
-<!--            <input type="text" id="inputEmail" class="form-control" placeholder="Username" required autofocus>-->
-<!--            <label for="inputPassword" class="sr-only">Password</label>-->
-<!--            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>-->
-<!--            <label for="confirmPassword" class="sr-only">Confirm password</label>-->
-<!--            <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm password" required>-->
-<!--            <button class="btn btn-lg btn-primary btn-block" type="submit">Registration</button>-->
-<!--        </div>-->
-<!--    </form>-->
-
-
 
 </section>
 </body>

@@ -5,7 +5,9 @@ import router from 'router/router'
 import App from 'pages/App.vue'
 import { connect } from './util/ws'
 
-connect()
+
+    connect()
+
 
 
 

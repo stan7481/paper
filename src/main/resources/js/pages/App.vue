@@ -1,26 +1,18 @@
-<template>
-    <!-- <messages-list :messages="messages" /> -->
-    
+<template>    
         <router-view></router-view>
-
 </template>
 
 <script>
-    // import MessagesList from 'components/messages/MessageList.vue'
+
     import { addHandler } from 'util/ws'
 
     export default {
         data()  {
             return{
-              
-
-                // messages: frontendData.messages.filter(message => message.author.id == ((this.$route.params.id != null) ? this.$route.params.id : frontendData.usrID))
-
-                messages: frontendData.messages,
-                // userId: frontendData.usrID
+                messages: messages
             }
         },
-        created() { // socets rest Api
+        created() {
          addHandler(data => {
             if(data.objectType === 'MESSAGE'){
                 const index = this.messages.findIndex(item => item.id === data.body.id)

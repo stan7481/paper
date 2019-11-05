@@ -13,9 +13,8 @@ import java.util.function.BiConsumer;
 
 @Component
 public class WsSender {
-    // Antwortet von Message Schicken
+
     private final SimpMessagingTemplate template;
-    // Serialization von Objects
     private final ObjectMapper mapper;
 
     public WsSender(SimpMessagingTemplate template, ObjectMapper mapper) {
