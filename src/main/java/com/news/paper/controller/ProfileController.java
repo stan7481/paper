@@ -1,41 +1,62 @@
 package com.news.paper.controller;
 
-import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.news.paper.DB.User;
 import com.news.paper.DB.Views;
-import com.news.paper.service.ProfileService;
+import com.news.paper.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.news.paper.repo.MessageRepo;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-@RestController
-@RequestMapping("userProfile")
+
+@Controller
 public class ProfileController {
-    private  final ProfileService profileService;
+    private final MessageRepo messageRepo;
+    private final UserRepo userRepo;
+
+    private final ObjectWriter messageWriter;
+    private final ObjectWriter profileWritter;
 
     @Autowired
-    public ProfileController(ProfileService profileService) {
-        this.profileService = profileService;
+    public ProfileController(MessageRepo messageRepo, UserRepo userRepo, ObjectMapper mapper) {
+
+        this.messageRepo = messageRepo;
+        this.userRepo = userRepo;
+
+
+        ObjectMapper objectMapper = mapper.setConfig(mapper.getSerializationConfig());
+
+        this.messageWriter =  mapper
+                .setConfig(mapper.getSerializationConfig())
+                .writerWithView(Views.FullMessage.class);
+
+        this.profileWritter =  mapper
+                .setConfig(mapper.getSerializationConfig())
+                .writerWithView(Views.FullProfile.class);
+
     }
 
-    @GetMapping("{id}")
-    @JsonView(Views.FullProfile.class)
-    public User get(@PathVariable("id") User user){
-        return user;
+    @GetMapping("/prututofile")
+    public String Myprofile(Model model, @AuthenticationPrincipal User user) throws JsonProcessingException {
+//
+        String messages = messageWriter.writeValueAsString(messageRepo.findByAuthor(user));
+//
+        return "profile";
     }
 
-    @PostMapping("change-subscription/{channelId}")
-    @JsonView(Views.FullProfile.class)
-    public User changeSubscription(
-            @AuthenticationPrincipal User subscriber,
-            @PathVariable("channelId") User channel
-    ){
-        if(subscriber.equals(channel)) {
-            return channel;
-        }
-        else {
-            return profileService.changeSubscription(channel, subscriber);
-        }
-    }
+//    @GetMapping("/profile/{id}")
+//    public String profile(Model model, @AuthenticationPrincipal User user) throws JsonProcessingException {
+//
+//        String messages = messageWriter.writeValueAsString(messageRepo.findByAuthor(user));
+//
+//        return "profile";
+//    }
+
 
 }

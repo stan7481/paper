@@ -7,8 +7,11 @@
 >
 
 <head>
+    <frame-options policy="SAMEORIGIN"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
     <title>News Paper</title>
+
 </head>
 <body>
 
@@ -17,7 +20,23 @@
     <script th:inline="javascript">
         var frontendData = [[${frontendData}]];
         var messages = [# th:utext="${messages}" /];
-        var profile = [# th:utext="${profile}" /];
+
+      // if([[${subscriptionsMessage}]] != ""){
+        // var subscriptionsMessage = [# th:utext="${subscriptionsMessage}" /];
+        //}
+        //else {
+          // var subscriptionsMessage = null
+        //}
+
+  //var subscriptionsMessage = ([[${subscriptionsMessage}]] != "1") ? [# th:utext="${subscriptionsMessage}" /] : null;
+
+
+
+
+
+       // var profile = [# th:utext="${profile}" /];
+        var userName = [[${userName}]];
+
     </script>
 
     <div id="app"></div>
