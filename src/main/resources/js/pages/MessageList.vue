@@ -31,13 +31,10 @@
     export default {
         components: {
             MessageRow,
-
-            // MessageForm
-        },
+},
         data() {
             return {
                 message: null,
-               // messages: frontendData.messages,
             messages: null,
             usrID: frontendData.usrID,
             subscriptionsMessage: {}
@@ -63,18 +60,12 @@
 
                     const test = await messagesApi.getSubscriptionsArticle(this.usrID)
                     this.subscriptionsMessage = await test.json()
-                    
-                    
-
-                    // console.log(test3)
-
                 }
 
 
                 const test2 = await messagesApi.get()
                 const test3 = await test2.json()
                 this.messages = await test2.json()
-                // this.messages = messages
                 this.$forceUpdate()
                 
             }
@@ -91,15 +82,6 @@
  </script>
 
  <style>
-/*.card-columns {
-  @include media-breakpoint-only(lg) {
-    column-count: 4;
-  }
-  @include media-breakpoint-only(xl) {
-    column-count: 5;
-  }
-}*/
-
 
  </style>
 
