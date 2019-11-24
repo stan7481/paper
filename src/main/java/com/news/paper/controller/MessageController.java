@@ -3,6 +3,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.function.BiConsumer;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.news.paper.DB.Message;
 import com.news.paper.DB.User;
 import com.news.paper.DB.Views;
@@ -99,4 +100,23 @@ public class MessageController {
         return messageService.loadMessageBySubscriber(user);
 //        return (messageService.cutMessages(messageRepo.findAll()));
     }
+
+    @PostMapping("change-likes/{messageId}")
+    @JsonView(Views.FullMessage.class)
+    public Message changeliks(
+            @AuthenticationPrincipal User user,
+            @PathVariable("messageId") Message message
+    ){
+
+
+//        if(subscriber.equals(channel)) {
+//            return channel;
+//        }
+//        else {
+////            return profileService.changeSubscription(channel, subscriber);
+//            return null;
+//        }
+        return messageService.changeLiks(message, user);
+    }
+
 }

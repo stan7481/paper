@@ -17,15 +17,37 @@
             <input type="button" class="btn btn-link" value="X" @click="del"  />  
         </div>
     </div>
-    <ul class="list-group list-group-flush" v-if="isntProfile()">
+    <ul class="list-group list-group-flush" >
     <li class="list-group-item"> 
-       Author: <a :href="'/profile/' + message.author.id"> {{message.author.username}}</a>
+     <div class="d-flex">
+      <span v-if="isntProfile()" >Author: <a :href="'/profile/' + message.author.id"> {{message.author.username}}</a> </span> 
+      <!-- <i class="fa fa-heart" aria-hidden="true"></i> -->
+      <!-- <span class="ml-auto"><i class="fa fa-heart" aria-hidden="true"></i></span> -->
+      <span class="ml-auto"><like :message="message" :user="userId" /></span>
+      <!-- <p class="text-right">like</p> -->
+       <!-- <like /> -->
+
+        
+
+
+     </div>
+    </li>
+    
+       
     </li>
   </ul>
+  
     </div>
  </template>
  <script>
+  import Like from 'components/messages/Like.vue'
+
+
     export default {
+      
+      components: {
+            Like
+        },
         data() {
             return {
                 
@@ -33,12 +55,10 @@
             }
         },
 
-            props: ['message', 'messages', 'editMessage', 'deleteMessage'],
+            props: ['message', 'messages', 'deleteMessage'],
         
         methods: {
-            edit() {
-                this.editMessage(this.message)
-            },
+            
             del() {
                 this.deleteMessage(this.message)
             },

@@ -6,7 +6,7 @@
             <h5>Subscriptions </h5>
             <div class="card-columns" > 
             <message-row  v-for="message in subscriptionsMessage" :key="message.id"
-                :message="message" :messages="subscriptionsMessage" :editMessage="editMessage" :deleteMessage="deleteMessage"/>
+                :message="message" :messages="subscriptionsMessage" />
                 </div>
         </div>
 
@@ -15,8 +15,8 @@
         <div class="card-columns" > 
 
 
-            <message-row  v-for="message in messages" :key="message.id"
-                :message="message" :messages="messages" :editMessage="editMessage" :deleteMessage="deleteMessage"/>
+             <message-row  v-for="message in messages" :key="message.id"
+                :message="message" :messages="messages"/>
         </div>
 
     </div>
@@ -25,12 +25,13 @@
  
  <script>
     import MessageRow from 'components/messages/MessageRow.vue'
-  //  import MessageForm from 'components/messages/MessageForm.vue'
+   
     import messagesApi from 'api/messages'
 
     export default {
         components: {
             MessageRow,
+
             // MessageForm
         },
         data() {

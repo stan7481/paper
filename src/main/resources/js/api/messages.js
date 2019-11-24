@@ -9,5 +9,6 @@ export default {
     update: message => messages.update({id: message.id}, message),
     remove: id => messages.remove({id}),
     getOnlyOwnerArticles: channelId => Vue.http.post(`/message/onlyOwnerArticles/${channelId}`),
-    getSubscriptionsArticle: userId => Vue.http.post(`/message/subscriptionsArticle/${userId}`)
+    getSubscriptionsArticle: userId => Vue.http.post(`/message/subscriptionsArticle/${userId}`),
+    changeLiks: messageId => Vue.http.post(`/message/change-likes/${messageId}`)
 }

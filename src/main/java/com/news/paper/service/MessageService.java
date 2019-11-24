@@ -64,6 +64,31 @@ public class MessageService {
         return mess;
     }
 
+    public Message changeLiks(Message message, User user) {
+//        Set<User> subscribers = channel.getSubscribers();
+//
+//        if (subscribers.contains(subscriber)) {
+//            subscribers.remove(subscriber);
+//        } else {
+//            subscribers.add(subscriber);
+//        }
+//
+//        return userRepo.save(channel);
+       Set<User> likesUsers = message.getLikes();
+
+       if(likesUsers.contains(user)){
+           likesUsers.remove(user);
+       } else {
+           likesUsers.add(user);
+       }
+
+        messageRepo.save(message);
+
+       return message;
+    }
+
+
+
 
 
 
