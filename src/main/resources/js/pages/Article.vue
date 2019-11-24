@@ -1,12 +1,9 @@
 <template>
-    
     <div>
         <h5>{{title}}</h5>
         <div> {{text}} </div>
     </div>
-
 </template>
-
 <script>
     import messagesApi from 'api/messages'
 
@@ -21,7 +18,6 @@ export default {
         }
     },
     methods: {
-
         async getArticle() {
  
                 const id = this.$route.params.id

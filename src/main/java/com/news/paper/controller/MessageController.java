@@ -30,14 +30,12 @@ public class MessageController {
     @Autowired
     public MessageController(MessageRepo messageRepo, WsSender wsSender){
         this.messageRepo = messageRepo;
-
         this.wsSender = wsSender.getSender(ObjectType.MESSAGE, Views.FullMessage.class);
     }
 
     @GetMapping
     public List<Message> getAll(){
         return (messageService.cutMessages(messageRepo.findAll()));
-//        return messageRepo.findAll();
     }
 
 
@@ -49,8 +47,9 @@ public class MessageController {
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable("id") Message message) {
-        messageRepo.delete(message);
         wsSender.accept(EventType.REMOVE, message);
+        messageRepo.delete(message);
+
     }
 
     @PostMapping
@@ -59,7 +58,6 @@ public class MessageController {
 
          user.setSubscribers(null);
          user.setSubscriptions(null);
-//        user.setSubscriptions(null);
         message.setAuthor(user);
 
         Message updateMessage = messageRepo.save(message);
@@ -74,22 +72,17 @@ public class MessageController {
             @RequestBody Message message)
     {
         BeanUtils.copyProperties(message, messageFromDb, "id", "author");
-
         messageFromDb.setCreationDate(LocalDateTime.now());
-
         Message updatedMessage = messageRepo.save(messageFromDb);
         wsSender.accept(EventType.UPDATE, updatedMessage);
 
         return updatedMessage;
     }
 
-
     @PostMapping("onlyOwnerArticles/{channelId}")
     public List<Message> getOnlyOwnerArticles(
             @PathVariable("channelId") User channel
     ){
-
-//       return messageRepo.findByAuthor(channel);
         return (messageService.cutMessages(messageRepo.findByAuthor(channel)));
     }
 
@@ -98,7 +91,6 @@ public class MessageController {
             @PathVariable("userId") User user
     ){
         return messageService.loadMessageBySubscriber(user);
-//        return (messageService.cutMessages(messageRepo.findAll()));
     }
 
     @PostMapping("change-likes/{messageId}")
@@ -107,15 +99,6 @@ public class MessageController {
             @AuthenticationPrincipal User user,
             @PathVariable("messageId") Message message
     ){
-
-
-//        if(subscriber.equals(channel)) {
-//            return channel;
-//        }
-//        else {
-////            return profileService.changeSubscription(channel, subscriber);
-//            return null;
-//        }
         return messageService.changeLiks(message, user);
     }
 

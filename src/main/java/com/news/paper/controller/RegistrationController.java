@@ -35,7 +35,6 @@ public class RegistrationController {
     private UserRepo userRepo;
     @Autowired
     private UserService userSevice;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
 

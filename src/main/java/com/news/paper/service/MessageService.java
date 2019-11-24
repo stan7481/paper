@@ -5,10 +5,9 @@ import com.news.paper.DB.User;
 import com.news.paper.repo.MessageRepo;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -23,8 +22,6 @@ public class MessageService {
         this.messageRepo = messageRepo;
     }
 
-
-
     public List<Message> loadMessageBySubscriber(User user)
     {
 
@@ -33,17 +30,10 @@ public class MessageService {
 
         Set<User> Subsc = user.getSubscriptions();
 
-         var test1 = messages.toArray();
-         var test2 = Subsc.toArray();
-
-
         for (Message message : messages) {
-
-
-         if(Subsc.contains(message.getAuthor())){
-            mess.add(message);
-         }
-
+            if(Subsc.contains(message.getAuthor())){
+                mess.add(message);
+            }
         }
         return cutMessages(mess);
     }
@@ -54,26 +44,15 @@ public class MessageService {
         for(Message message : messages){
             if(message.getText().length() > 25){
                 message.setText((message.getText().substring(0,100) + "..."));
-
             }
-
             mess.add(message);
             int i = 1;
         }
-
         return mess;
     }
 
     public Message changeLiks(Message message, User user) {
-//        Set<User> subscribers = channel.getSubscribers();
-//
-//        if (subscribers.contains(subscriber)) {
-//            subscribers.remove(subscriber);
-//        } else {
-//            subscribers.add(subscriber);
-//        }
-//
-//        return userRepo.save(channel);
+
        Set<User> likesUsers = message.getLikes();
 
        if(likesUsers.contains(user)){
@@ -81,15 +60,8 @@ public class MessageService {
        } else {
            likesUsers.add(user);
        }
-
         messageRepo.save(message);
-
        return message;
     }
-
-
-
-
-
 
 }

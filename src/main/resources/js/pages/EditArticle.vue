@@ -48,13 +48,10 @@
                     title: this.title,
                     text: this.text
                 }
-
                 if ((this.text != '')  && (this.title != '')) {
-                       
                     if (this.id){messagesApi.update(message)} 
                         else {messagesApi.add(message)}
                     this.$forceUpdate()
-
                     window.location.href = "/profile";
                 } else {
                     this.invalid= true    
@@ -79,10 +76,6 @@
                    }
 
                 this.$forceUpdate()
-                    
-
-
-
                 }
         },
         beforeMount() {
